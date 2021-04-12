@@ -75,5 +75,5 @@ Function LoadFrames(filePath As String, x As Integer, y As Integer) As Variant
             Values(i, j) = CByte(CInt(numbersStrings(j)))
         Next j
     Next i
-    CalculateFrame = Values
+    LoadFrames = Values
 End Function

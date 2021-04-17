@@ -16,6 +16,7 @@ Attribute PasteFrames.VB_ProcData.VB_Invoke_Func = " \n14"
 '   change pathToFrames to store the path to folder where the frames are stored
 '   minFrameTime decides on the minimum time a frame is shown on screen
 '   assign 0 for the fastest render
+'   or delete the section with events and ticks in the last for for maximum efficiency
     pathToFrames = "D:\Documents\badApple\5"
     minFrameTime = 0
     
@@ -27,7 +28,7 @@ Attribute PasteFrames.VB_ProcData.VB_Invoke_Func = " \n14"
     ReDim Values(oFolder.Files.Count)
 
     For i = 1 To oFolder.Files.Count
-        Values(i) = LoadFrames(pathToFrames & "\frame" & i & ".txt", 1, 1)
+        Values(i) = LoadFrames(pathToFrames & "\frame" & i & ".txt")
     Next i
     
     Dim rowsCount As Integer, columnsCount As Integer
@@ -36,8 +37,6 @@ Attribute PasteFrames.VB_ProcData.VB_Invoke_Func = " \n14"
     
     MsgBox "frames finished loading to memory"
     MsgBox "simulation will start after you press ok. To stop it earlier press ctrl + break"
-    
-    
     
     Dim now As Long, finish As Long
     
@@ -52,13 +51,10 @@ Attribute PasteFrames.VB_ProcData.VB_Invoke_Func = " \n14"
     
 End Sub
 
-Function LoadFrames(filePath As String, x As Integer, y As Integer) As Variant
+Function LoadFrames(filePath As String) As Variant
     Open filePath For Input As #1
     Content = Input(LOF(1), 1)
     Close #1
-    
-    Dim currx As Integer, curry As Integer
-    currx = x
     
     Dim lines() As String, rowsCount As Integer, columnsCount As Integer
     lines = Split(Content, vbLf)
